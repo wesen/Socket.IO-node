@@ -30,7 +30,12 @@
         return msg.replace(/</g, '&lt;').replace(/>/g, '&gt;');
       };
     
-      var socket = new io.Socket(null, {rememberTransport: false, port: 8080});
+      var socket = new io.Socket(null, {rememberTransport: false,
+      port: 8080, transports: ['websocket', 'htmlfile',
+      'xhr-multipart', 'xhr-polling']});
+socket.addEvent('connect', function() {
+alert("connected");
+});
       socket.connect();
       socket.addEvent('message', function(data){
         var obj = JSON.parse(data);

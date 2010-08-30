@@ -29,17 +29,10 @@
       function esc(msg){
         return msg.replace(/</g, '&lt;').replace(/>/g, '&gt;');
       };
-    
-      var socket = new io.Socket(null, {rememberTransport: false,
-      port: 8080, transports: ['websocket', 'htmlfile',
-      'xhr-multipart', 'xhr-polling']});
-socket.addEvent('connect', function() {
-alert("connected");
-});
+      
+      var socket = new io.Socket(null, {port: 8080});
       socket.connect();
-      socket.addEvent('message', function(data){
-        var obj = JSON.parse(data);
-
+      socket.on('message', function(obj){
         if ('buffer' in obj){
           document.getElementById('form').style.display='block';
           document.getElementById('chat').innerHTML = '';

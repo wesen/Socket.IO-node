@@ -3,10 +3,12 @@ Socket.IO Server: Sockets for the rest of us
 
 The `Socket.IO` server provides seamless supports for a variety of transports intended for realtime communication
 
-- WebSocket (with Flash policy support)
+- WebSocket 
+- WebSocket over Flash (+ XML security policy support)
 - XHR Polling
 - XHR Multipart Streaming
 - Forever Iframe
+- JSONP Polling (for cross domain)
 
 ## Requirements
 
@@ -14,6 +16,16 @@ The `Socket.IO` server provides seamless supports for a variety of transports in
 - [Socket.IO client](http://github.com/LearnBoost/Socket.IO) to connect from the browser
 
 ## How to use
+
+To run the demo:
+
+	git clone git://github.com/LearnBoost/Socket.IO-node.git socket.io-node --recursive
+	cd socket.io-node/example/
+	sudo node server.js
+
+and point your browser to http://localhost:8080. In addition to 8080, if the transport `flashsocket` is enabled, a server will be initialized to listen to requests on the port 843.
+
+### Implementing it on your project
 
 `Socket.IO` is designed not to take over an entire port or Node `http.Server` instance. This means that if you choose your HTTP server to listen on the port 80, `socket.io` can intercept requests directed to it and the normal requests will still be served.
 
@@ -38,7 +50,7 @@ By default, the server will intercept requests that contain `socket.io` in the p
 	  client.on('disconnect', function(){ … })
 	});
 	
-On the client side, you should use the [Socket.IO client](https://github.com/LearnBoost/Socket.IO) to connect.
+On the client side, you should include socket.io.js from [Socket.IO client](https://github.com/LearnBoost/Socket.IO) to connect (follow the link for an explanation of the client-side API).
 
 ## Notes
 
@@ -49,14 +61,6 @@ IMPORTANT! When checking out the git repo, make sure to include the submodules. 
 Another, once cloned
 
 	git submodule update --init --recursive
-
-## Demo
-
-To run the demo, go to `example` directory and run
-
-	sudo node server.js
-	
-and point your browser to http://localhost:8080. In addition to 8080, if the transport `flashsocket` is enabled, a server will be initialized to listen to requests on the port 843.
 
 ## Documentation
 
@@ -78,10 +82,6 @@ Public Properties:
 	
 - *clients*
 	
-	An array of clients. Important: disconnected clients are set to null, the array is not spliced.
-	
-- *clientsIndex*
-
 	An object of clients indexed by their session ids.
 	
 Methods:

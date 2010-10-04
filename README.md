@@ -12,7 +12,7 @@ The `Socket.IO` server provides seamless supports for a variety of transports in
 
 ## Requirements
 
-- Node v0.1.102+
+- Node v0.1.103+
 - [Socket.IO client](http://github.com/LearnBoost/Socket.IO) to connect from the browser
 
 ## How to use
@@ -50,7 +50,17 @@ By default, the server will intercept requests that contain `socket.io` in the p
 	  client.on('disconnect', function(){ … })
 	});
 	
-On the client side, you should include socket.io.js from [Socket.IO client](https://github.com/LearnBoost/Socket.IO) to connect (follow the link for an explanation of the client-side API).
+On the client side:
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		var socket = new io.Socket();
+		socket.on('connect', function(){ … })
+		socket.on('message', function(){ … })
+		socket.on('disconnect', function(){ … })
+	</script>
+
+The [client side](http://github.com/learnboost/socket.io) files will be served automatically by `Socket.IO-node`.
 
 ## Notes
 
@@ -186,7 +196,9 @@ Despite this extra layer, your messages are delivered unaltered to the different
 
 ## Credits
 
-Guillermo Rauch &lt;guillermo@learnboost.com&gt;
+- Guillermo Rauch &lt;guillermo@learnboost.com&gt; ([Guille](http://github.com/guille))
+
+- Arnout Kazemier ([3rd-Eden](http://github.com/3rd-Eden))
 
 ## License 
 
